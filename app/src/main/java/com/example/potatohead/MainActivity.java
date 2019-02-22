@@ -8,7 +8,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
-
     //Initialize the image visibility
     private View Arms;
     private View Nose;
@@ -21,16 +20,13 @@ public class MainActivity extends AppCompatActivity {
     private View Mustache;
     private View Ears;
 
+    // create the layout using the bundle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Arms =  findViewById(R.id.arms);
         Nose =  findViewById(R.id.nose);
-
-        Log.d("Visibility", Arms.getVisibility()  + String.valueOf(Nose.getVisibility()));
-
         Shoes =  findViewById(R.id.shoes);
         Hat =  findViewById(R.id.hat);
         Glasses =  findViewById(R.id.glasses);
@@ -40,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         Mustache =  findViewById(R.id.mustache);
         Ears =  findViewById(R.id.ears);
     }
+
+    // saves the instance in a bundle
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState); // always call super
-
         // check if Views are visible
-
         int noseVisible = Nose.getVisibility();
         int shoesVisible = Shoes.getVisibility();
         int hatVisible = Hat.getVisibility();
@@ -56,10 +52,7 @@ public class MainActivity extends AppCompatActivity {
         int mustacheVisible = Mustache.getVisibility();
         int earsVisible = Ears.getVisibility();
         int armsVisible = Arms.getVisibility();
-
-        Log.d("errorcheck", String.valueOf(armsVisible) + String.valueOf(noseVisible));
         // put visibilities into the out state
-
         outState.putInt("noseVisible", noseVisible);
         outState.putInt("shoesVisible", shoesVisible);
         outState.putInt("hatVisible", hatVisible);
@@ -71,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("earsVisible", earsVisible);
         outState.putInt("armsVisible", armsVisible);
     }
+
+    // restores the instance from the bundle
     @Override
     public void onRestoreInstanceState(Bundle inState) {
         super.onRestoreInstanceState(inState);
-
         // get the visibility values
-
         int noseVisible = inState.getInt("noseVisible");
         int shoesVisible = inState.getInt("shoesVisible");
         int hatVisible = inState.getInt("hatVisible");
@@ -87,9 +80,7 @@ public class MainActivity extends AppCompatActivity {
         int mustacheVisible = inState.getInt("mustacheVisible");
         int earsVisible = inState.getInt("earsVisible");
         int armsVisible = inState.getInt("armsVisible");
-
         // set the values correctly
-
         Nose.setVisibility(noseVisible);
         Shoes.setVisibility(shoesVisible);
         Hat.setVisibility(hatVisible);
@@ -100,16 +91,13 @@ public class MainActivity extends AppCompatActivity {
         Mustache.setVisibility(mustacheVisible);
         Ears.setVisibility(earsVisible);
         Arms.setVisibility(armsVisible);
-
     }
+
+    // checks if the checkboxes get clicked
     public void checkClicked(View v) {
         CheckBox checkbox = (CheckBox) v;
         ImageView image;
-
-        Log.d( "potato", "checkClicked: " + checkbox.getId());
-
         boolean checked = checkbox.isChecked();
-
         switch(checkbox.getId()) {
             case R.id.checkBoxNose:
                 image = findViewById(R.id.nose);
@@ -141,13 +129,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.checkBoxEars:
                 image = findViewById(R.id.ears);
                 break;
-            // To prevent errors
+            // to prevent errors we set a default value
             default:
                 image = findViewById(R.id.ears);
         }
-
-
-
+        // set the visibility correct if the checkbox is clicked
         if (checked){
             image.setVisibility(View.VISIBLE);
         }
